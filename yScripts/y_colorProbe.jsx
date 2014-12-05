@@ -35,7 +35,10 @@ yColorProbe_data.res = "window { \
     #include "usefulFunctions.jsx";
 
 function yColorProbe(){
+	//It works with Sampled layers at a 100% scale only.
+	
     app.beginUndoGroup('Create ColorProbe');
+    sel = app.project.activeItem.selectedLayers[0];
     
     myNull = app.project.activeItem.layers.addNull();
     myNull.transform.anchorPoint.setValue([50,50]);
@@ -46,12 +49,17 @@ function yColorProbe(){
     colorCTRL.name='outColor';
     radiusCTRL = myNull("Effects").addProperty("Slider Control");
     radiusCTRL.name ='radius';
-    myNull("Effects")("radius")('Slider').setValue(0.5);
+    myNull("Effects")("radius")('Slider').setValue(5);
     colExp = 'myLayer = thisLayer("Effects")("sampledLayer")("Layer");\
     p = thisLayer.toWorld(thisLayer.transform.anchorPoint);\
     r = thisLayer("Effects")("radius")("Slider");\
     myLayer.sampleImage(p, radius = [r, r], postEffect=true, t=time)';
     myNull("Effects")('outColor')('Color').expression=colExp;
+    myNull.label=2;
+    myNull.source.height=30;
+    myNull.source.width=30;
+    myNull.anchorPoint=(15,15);
+    myNull("Effects")('sampledLayer')(1).setValue(sel.index)
     
     app.endUndoGroup();
     return 'ok'
