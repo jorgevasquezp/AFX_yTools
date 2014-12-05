@@ -36,9 +36,16 @@ yColorProbe_data.res = "window { \
 
 function yColorProbe(){
 	//It works with Sampled layers at a 100% scale only.
-	
     app.beginUndoGroup('Create ColorProbe');
-    sel = app.project.activeItem.selectedLayers[0];
+    
+    try
+	{
+		sel = app.project.activeItem.selectedLayers[0];
+	}
+	catch (err)
+	{
+		sel = undefined;
+	}
     
     myNull = app.project.activeItem.layers.addNull();
     myNull.transform.anchorPoint.setValue([50,50]);
@@ -59,8 +66,10 @@ function yColorProbe(){
     myNull.source.height=30;
     myNull.source.width=30;
     myNull.anchorPoint=(15,15);
-    myNull("Effects")('sampledLayer')(1).setValue(sel.index)
-    
+	
+	if(sel!==undefined){
+		myNull("Effects")('sampledLayer')(1).setValue(sel.index);
+	}
     app.endUndoGroup();
     return 'ok'
     }
