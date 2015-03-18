@@ -8,15 +8,15 @@ ySetProject_data.scriptVer = '0.1a';
 ySetProject_data.webLink = 'yorchnet.com';
 
 //if yToolBox Exists add it to its tool list.
-if (typeof(yToolBox_data)!=='undefined'){
-    yToolBox_data.tools.push(ySetProject_data);
+if (typeof(YTB)!=='undefined'){
+    YTB.tools.push(ySetProject_data);
     
     //it should be called from toolbox.
     /*
      ySetProject_data.buttonWidth=76;
      ySetProject_data.buttonHeight=30;
      */
-     ySetProject_data.btnLayout = "btn_"+ ySetProject_data.scriptName+": Button { preferredSize: ['"+ yToolBox_data.buttonWidth+"','"+ yToolBox_data.buttonHeight+"'], text:'"+ySetProject_data.scriptName+"', helpTip:'"+ySetProject_data.scriptDesc+"' }";
+     ySetProject_data.btnLayout = "btn_"+ ySetProject_data.scriptName+": Button { preferredSize: ['"+ YTB.buttonWidth+"','"+ YTB.buttonHeight+"'], text:'"+ySetProject_data.scriptName+"', helpTip:'"+ySetProject_data.scriptDesc+"' }";
     
     }
 
@@ -77,7 +77,7 @@ function build_ySetProject_data_UI(){
 ySetProject_data.activate = ySetProject ;
 
 //CHECKS that the toolbox exists, and if it doesn´t it runs the script on its own.
-if (typeof(yToolBox_data)=='undefined'){
+if (typeof(YTB)=='undefined'){
         ySetProject_data.activate();
 	}else{
     }

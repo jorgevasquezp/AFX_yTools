@@ -20,9 +20,9 @@ yPuppetRig_data.buttonWidth=76;
 yPuppetRig_data.buttonHeight=30;
 
 //if yToolBox Exists add it to its tool list.
-if (typeof(yToolBox_data)!=='undefined'){
-    yToolBox_data.tools.push(yPuppetRig_data);
-     yPuppetRig_data.btnLayout = "btn_"+ yPuppetRig_data.scriptName+": Button { preferredSize: ['"+yToolBox_data.buttonWidth+"','"+ yToolBox_data.buttonHeight+"'], text:'"+yPuppetRig_data.scriptName+"', helpTip:'"+yPuppetRig_data.scriptDesc+"' }";
+if (typeof(YTB)!=='undefined'){
+    YTB.tools.push(yPuppetRig_data);
+     yPuppetRig_data.btnLayout = "btn_"+ yPuppetRig_data.scriptName+": Button { preferredSize: ['"+YTB.buttonWidth+"','"+ YTB.buttonHeight+"'], text:'"+yPuppetRig_data.scriptName+"', helpTip:'"+yPuppetRig_data.scriptDesc+"' }";
     }
         
 function build_yPuppetRig_data_UI(){
@@ -55,13 +55,13 @@ yPuppetRig_data.res = "window { \
                     },\
                     	info: Group { \
                         alignment:['center','bottom'], \
-                            icn_app: Image {icon:'"+ yToolBox_data.icon.path+'/'+ yToolBox_data.icon.name+"',preferredSize: [15, 18]},\
+                            icn_app: Image {icon:'"+ YTB.icon.path+'/'+ YTB.icon.name+"',preferredSize: [15, 18]},\
                             txt_info: StaticText { text:'"+yPuppetRig_data.string_info+"', alignment:['fill','center'] },\
                     }\
                 }\
             }";
             
-    //if (typeof(yToolBox_data)!=='undefined'){
+    //if (typeof(YTB)!=='undefined'){
         yPuppetRigDialog = new Window (yPuppetRig_data.res);  // Creates Window
     //}
 	//yPuppetRigDialog.onDraw = customColors(yPuppetRigDialog);
@@ -70,7 +70,7 @@ yPuppetRig_data.res = "window { \
     
 	
     
-    //yPuppetRigDialog.grp.info.icn_app.image = yToolBox_data.icon.substring(3,yToolBox_data.icon.length);
+    //yPuppetRigDialog.grp.info.icn_app.image = YTB.icon.substring(3,YTB.icon.length);
     yPuppetRigDialog.grp.btn_01.onClick =  runRigPin; //Defines Button Action
 	yPuppetRigDialog.grp.btn_02.onClick =  runRigLayer; //Defines Button Action
 	yPuppetRigDialog.grp.btn_03.onClick =  runRigAll; //Defines Button Action
@@ -239,7 +239,7 @@ function setPropsFromUI(){
 
 
 //CHECKS that the toolbox exists, and if it doesn´t it runs the script on its own.
-if (typeof(yToolBox_data)=='undefined'){
+if (typeof(YTB)=='undefined'){
        yPuppetRig_data.activate();
 	}else{
     }

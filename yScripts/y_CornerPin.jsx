@@ -8,15 +8,15 @@ yOffsetCornerPin_data.scriptVer = '0.1a';
 yOffsetCornerPin_data.webLink = 'yorchnet.com';
 
 //if yToolBox Exists add it to its tool list.
-if (typeof(yToolBox_data)!=='undefined'){
-    yToolBox_data.tools.push(yOffsetCornerPin_data);
+if (typeof(YTB)!=='undefined'){
+    YTB.tools.push(yOffsetCornerPin_data);
     
     //it should be called from toolbox.
     /*
      yOffsetCornerPin_data.buttonWidth=76;
      yOffsetCornerPin_data.buttonHeight=30;
      */
-     yOffsetCornerPin_data.btnLayout = "btn_"+ yOffsetCornerPin_data.scriptName+": Button { preferredSize: ['"+ yToolBox_data.buttonWidth+"','"+ yToolBox_data.buttonHeight+"'], text:'"+yOffsetCornerPin_data.scriptName+"', helpTip:'"+yOffsetCornerPin_data.scriptDesc+"' }";
+     yOffsetCornerPin_data.btnLayout = "btn_"+ yOffsetCornerPin_data.scriptName+": Button { preferredSize: ['"+ YTB.buttonWidth+"','"+ YTB.buttonHeight+"'], text:'"+yOffsetCornerPin_data.scriptName+"', helpTip:'"+yOffsetCornerPin_data.scriptDesc+"' }";
     
     }
 
@@ -102,7 +102,7 @@ function build_yOffsetCornerPin_data_UI(){
 yOffsetCornerPin_data.activate =processCornerPins ;
 
 //CHECKS that the toolbox exists, and if it doesn´t it runs the script on its own.
-if (typeof(yToolBox_data)=='undefined'){
+if (typeof(YTB)=='undefined'){
         yOffsetCornerPin_data.activate();
 	}else{
     }

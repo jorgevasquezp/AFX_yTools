@@ -4,10 +4,10 @@ yGeneric_data.scriptName = 'YTBGen';
 yGeneric_data.scriptDesc = 'YToolBox Generic Script is the base for adding tools.';
 yGeneric_data.scriptVer = '0.1a';
 yGeneric_data.webLink = 'yorchnet.com';
-yGeneric_data.img = yToolBox_data.icon;
+yGeneric_data.img = YTB.icon;
 
 //if yToolBox Exists add it to its tool list.
-if (typeof(yToolBox_data)!=='undefined'){
+if (typeof(YTB)!=='undefined'){
 
     //it should be called from toolbox.
      yGeneric_data.buttonWidth=76;
@@ -46,7 +46,7 @@ function build_yGeneric_data_UI(){
 yGeneric_data.activate = build_yGeneric_data_UI ;
 //alert();
 //CHECKS that the toolbox exists, and if it doesn´t it runs the script on its own.
-//if (typeof(yToolBox_data)=='undefined'){
+//if (typeof(YTB)=='undefined'){
        yGeneric_data.activate();
 	//}else{
     //}

@@ -6,14 +6,14 @@ yColorProbe_data.scriptVer = '0.2a';
 yColorProbe_data.webLink = 'yorchnet.com';
 
 //if yToolBox Exists add it to its tool list.
-if (typeof(yToolBox_data)!=='undefined'){
-    yToolBox_data.tools.push(yColorProbe_data);
+if (typeof(YTB)!=='undefined'){
+    YTB.tools.push(yColorProbe_data);
     
     //it should be called from toolbox.
     /* yColorProbe_data.buttonWidth=76;
      yColorProbe_data.buttonHeight=30;
 */
-    yColorProbe_data.btnLayout = "btn_"+yColorProbe_data.scriptName+": Button { preferredSize: ['"+ yToolBox_data.buttonWidth+"','"+ yToolBox_data.buttonHeight+"'], text:'"+yColorProbe_data.scriptName+"', helpTip:'"+yColorProbe_data.scriptDesc+"' }";
+    yColorProbe_data.btnLayout = "btn_"+yColorProbe_data.scriptName+": Button { preferredSize: ['"+ YTB.buttonWidth+"','"+ YTB.buttonHeight+"'], text:'"+yColorProbe_data.scriptName+"', helpTip:'"+yColorProbe_data.scriptDesc+"' }";
     
     }
 
@@ -83,7 +83,7 @@ function build_yColorProbe_data_UI(){
 yColorProbe_data.activate =yColorProbe ;
 
 //CHECKS that the toolbox exists, and if it doesn´t it runs the script on its own.
-if (typeof(yToolBox_data)=='undefined'){
+if (typeof(YTB)=='undefined'){
        yColorProbe_data.activate();
 	}else{
     }
