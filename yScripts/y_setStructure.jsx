@@ -1,5 +1,4 @@
 ﻿#include "../yScripts/y_JSExtensions.jsx";
-
 ySetProject_data = new Object();
 
 ySetProject_data.scriptName = 'YSetStructure';
@@ -8,16 +7,9 @@ ySetProject_data.scriptVer = '0.1a';
 ySetProject_data.webLink = 'yorchnet.com';
 
 //if yToolBox Exists add it to its tool list.
-if (typeof(yToolBox_data)!=='undefined'){
-    yToolBox_data.tools.push(ySetProject_data);
-    
-    //it should be called from toolbox.
-    /*
-     ySetProject_data.buttonWidth=76;
-     ySetProject_data.buttonHeight=30;
-     */
-     ySetProject_data.btnLayout = "btn_"+ ySetProject_data.scriptName+": Button { preferredSize: ['"+ yToolBox_data.buttonWidth+"','"+ yToolBox_data.buttonHeight+"'], text:'"+ySetProject_data.scriptName+"', helpTip:'"+ySetProject_data.scriptDesc+"' }";
-    
+if (typeof(ytb)!=='undefined'){
+    ySetProject_data.btnLayout = "btn_"+ ySetProject_data.scriptName+": Button { preferredSize: ['"+ ytb.buttonWidth+"','"+ ytb.buttonHeight+"'], text:'"+ySetProject_data.scriptName+"', helpTip:'"+ySetProject_data.scriptDesc+"' }";
+    ytb.addTool(ySetProject_data);
     }
 
 ySetProject_data.res = "window { \
@@ -77,7 +69,8 @@ function build_ySetProject_data_UI(){
 ySetProject_data.activate = ySetProject ;
 
 //CHECKS that the toolbox exists, and if it doesn´t it runs the script on its own.
-if (typeof(yToolBox_data)=='undefined'){
-        ySetProject_data.activate();
-	}else{
-    }
+if (typeof(ytb)=='undefined')
+{
+    ySetProject_data.activate();
+}else{
+}
