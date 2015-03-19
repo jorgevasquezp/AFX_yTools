@@ -14,6 +14,10 @@ function YSetProjectTool()
 	buttonHeight : 30,
 	buttonWidth : 126
     };
+    this.resources = 
+    {
+	icon : new File('yNet.png'),
+    };
     this.init = function init()
     {
 	//alert("my name is:" + this.info.name);
@@ -35,6 +39,7 @@ function YSetProjectTool()
 		alignment:['center','bottom'],\
 		icon: Image \
 		{\
+		    icon:'" + this.resources.icon.path + '/' + this.resources.icon.name + "',\
 		    preferredSize: [15, 18]\
 		},\
 		website: StaticText\
@@ -44,6 +49,11 @@ function YSetProjectTool()
 		},\
 	    }\
 	}";
+    }
+    this.createUI = function createUI()
+    {
+	this.window = new Window ( this.res );
+	this.window.show() ;
     }
     this.ySetProject = function ySetProject()
     {
@@ -99,17 +109,11 @@ function YSetProjectTool()
     return this;
 }
 
-function build_ySetProject_data_UI()
-{
-    ySetProject_data.window = new Window ( ySetProject_data.res );
-    ySetProject_data.window.show();
-}
-
 //CHECKS that the toolbox exists, and if it doesn´t it runs the script on its own.
 if (typeof(YTB)=='undefined')
 {
-    ySetProject_data = new YSetProjectTool();
-    ySetProject_data.activate();
+    ySetProjectTool = new YSetProjectTool();
+    ySetProjectTool.activate();
 }
 else
 {
