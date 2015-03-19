@@ -52,17 +52,26 @@ function YGenericTool()
     }
     this.createUI = function createUI()
     {
-        this.window = new Window ( this.res );
-        this.window.show() ;
+	    res = 
+	    "window {\
+		resizeable : true\
+		closeButton : true\
+		text:'wtf'\
+	    }"		    
+		
+	this.window = new Window( res );
+	this.window.layout.layout(true);
+	this.window.center();
+	this.window.show();
     }
     this.yMainFunction = function yMainFunction()
     {
         this.createUI();
-        app.beginUndoGroup( this.info.name );
-        app.endUndoGroup();
     }
-    
-    this.activate = this.yMainFunction;
+    this.activate = function activate()
+    {
+	this.yTool.yMainFunction();
+    }
     
     this.init();
     return this;
