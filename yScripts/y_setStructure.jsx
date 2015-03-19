@@ -16,7 +16,7 @@ function YSetProjectTool()
     };
     this.init = function init()
     {
-	alert("my name is:" + this.info.name);
+	//alert("my name is:" + this.info.name);
 	this.btnLauyout = 
 	"button\
 	 {\
@@ -47,7 +47,7 @@ function YSetProjectTool()
     }
     this.ySetProject = function ySetProject()
     {
-	alert("is this working");
+	//alert("is this working");
 	app.beginUndoGroup('ySetProject');
 	var preStruct = ["01 MAIN","02 PComp","03 Source Layers" ,"04 Movies","05 Other Projects","06 Audio" , "07 Reference"];
 	var newStruct = [];
@@ -98,10 +98,6 @@ function YSetProjectTool()
     this.init();
     return this;
 }
-
-//------------------------------------------------------------------------------------------------------------------------
-
-//------------------------------------------------------------------------------------------------------------------------
 
 function build_ySetProject_data_UI()
 {
