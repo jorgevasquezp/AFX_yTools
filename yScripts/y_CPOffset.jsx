@@ -66,8 +66,6 @@ function YCPOffset()
     }
     this.yMainFunction = function yMainFunction()
     {
-	alert(this);
-
 	//if called from the button as opposed as from the script.
 	if ( String(this) == "[object Button]" )
 	{
