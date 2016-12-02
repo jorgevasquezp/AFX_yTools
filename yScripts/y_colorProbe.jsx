@@ -6,7 +6,7 @@ function YColorProbe()
     this.info =
     {
 	name : "yColorProbe",
-	version : 0.0,
+	version : 0.1,
 	stage : "development",
 	description : "Creates a Null that will Sample the selected layer within the specified radius.",
 	url : "yorchnet.com"
@@ -75,29 +75,37 @@ function YColorProbe()
 		sel = undefined;
 	    }
 	
-	myNull = app.project.activeItem.layers.addNull();
-	myNull.transform.anchorPoint.setValue([50,50]);
-	myNull.name = yUniStr('colorProbe'); //Generates a Unique Name by adding numbers at the end of the main string.
-	layerCTRL = myNull("Effects").addProperty("Layer Control");
-	layerCTRL.name='sampledLayer';
-	colorCTRL = myNull("Effects").addProperty("Color Control");
-	colorCTRL.name='outColor';
-	radiusCTRL = myNull("Effects").addProperty("Slider Control");
-	radiusCTRL.name ='radius';
-	myNull("Effects")("radius")('Slider').setValue(5);
-	colExp = 'myLayer = thisLayer("Effects")("sampledLayer")("Layer");\
-	p = thisLayer.toWorld(thisLayer.transform.anchorPoint);\
-	r = thisLayer("Effects")("radius")("Slider");\
-	myLayer.sampleImage(p, radius = [r, r], postEffect=true, t=time)';
-	myNull("Effects")('outColor')('Color').expression=colExp;
-	myNull.label=2;
-	myNull.source.height=30;
-	myNull.source.width=30;
-	myNull.anchorPoint=(15,15);
-	    
-	    if(sel!==undefined){
-		    myNull("Effects")('sampledLayer')(1).setValue(sel.index);
+     if(sel!==undefined){    
+            myNull = app.project.activeItem.layers.addNull();
+            myNull.transform.anchorPoint.setValue([50,50]);
+            myNull.name = yUniStr('colorProbe'); //Generates a Unique Name by adding numbers at the end of the main string.
+            layerCTRL = myNull("Effects").addProperty("Layer Control");
+            layerCTRL.name='sampledLayer';
+            colorCTRL = myNull("Effects").addProperty("Color Control");
+            colorCTRL.name='outColor';
+            radiusCTRL = myNull("Effects").addProperty("Slider Control");
+            radiusCTRL.name ='radius';
+            myNull("Effects")("radius")('Slider').setValue(5);
+            colExp = 'myLayer = thisLayer("Effects")("sampledLayer")("Layer");\
+            p = thisLayer.toWorld(thisLayer.transform.anchorPoint);\
+            r = thisLayer("Effects")("radius")("Slider");\
+            myLayer.sampleImage(p, radius = [r, r], postEffect=true, t=time)';
+            myNull("Effects")('outColor')('Color').expression=colExp;
+            myNull.label=2;
+            myNull.source.height=30;
+            myNull.source.width=30;
+            myNull.anchorPoint=(15,15);
+            
+            myNull("Effects")('sampledLayer')(1).setValue(sel.index);
 	    }
+         else
+         {
+             alert("Error : No layer selected.")
+         }
+     
+	
+	    
+	   
 	    
         app.endUndoGroup();
     }

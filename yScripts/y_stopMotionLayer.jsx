@@ -4,7 +4,7 @@ function YGenericTool()
     this.info =
     {
 	name : "yGenericTool",
-	version : 0.0,
+	version : 0.1,
 	stage : "development",
 	description : "Generic script to use as a base for new tools.",
 	url : "yorchnet.com"
