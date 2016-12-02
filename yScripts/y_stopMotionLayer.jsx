@@ -3,7 +3,11 @@ function YGenericTool()
 {
     this.info =
     {
+<<<<<<< HEAD
 	name : "yStopMotion",
+=======
+	name : "yGenericTool",
+>>>>>>> 841484771586f75c140288b329d54c96d3cb3925
 	version : 0.1,
 	stage : "development",
 	description : "Dynamically change layer sequence opacity from a slider in pComp",
