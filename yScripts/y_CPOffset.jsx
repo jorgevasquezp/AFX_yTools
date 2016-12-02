@@ -169,5 +169,5 @@ if (typeof(YTB)=='undefined')
 }
 else
 {
-    YTB.addTool(new YCPOffset());
+    yCPOffset = YTB.addTool(new YCPOffset());
 }

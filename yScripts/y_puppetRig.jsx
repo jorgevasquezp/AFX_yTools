@@ -3,10 +3,10 @@ function YGenericTool()
 {
     this.info =
     {
-	name : "yGenericTool",
-	version : 0.0,
+	name : "yPuppetRig",
+	version : 0.33,
 	stage : "development",
-	description : "Generic script to use as a base for new tools.",
+	description : "Tools for streamlining puppet-based animation rigs.",
 	url : "yorchnet.com"
     };
     this.appearence =

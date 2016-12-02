@@ -3,10 +3,10 @@ function YGenericTool()
 {
     this.info =
     {
-	name : "yGenericTool",
-	version : 0.0,
+	name : "yStopMotion",
+	version : 0.1,
 	stage : "development",
-	description : "Generic script to use as a base for new tools.",
+	description : "Dynamically change layer sequence opacity from a slider in pComp",
 	url : "yorchnet.com"
     };
     this.appearence =
