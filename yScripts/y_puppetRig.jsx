@@ -4,7 +4,7 @@ function YPuppetRigTool()
     this.info =
     {
 	name : "yPuppetRig",
-	version : 0.1,
+	version : 0.0,
 	stage : "development",
 	description : "Tool to create nulls at puppet pin locations, and link the latter to the former.",
 	url : "yorchnet.com"
@@ -98,7 +98,7 @@ function YPuppetRigTool()
     }
     this.activate = function activate()
     {
-	this.yTool.yMainFunction();
+        yPuppetRigTool.yMainFunction();
     }
     
     /**/	

@@ -121,4 +121,4 @@ YTB.init();
 #include "../yScripts/y_BindBetween2.jsx";
 #include "../yScripts/y_CPOffset.jsx";
 #include "../yScripts/y_puppetRig.jsx";
-#include "../yScripts/y_GenericNewScript.jsx";
+#include "../yScripts/y_stopMotionLayer.jsx";

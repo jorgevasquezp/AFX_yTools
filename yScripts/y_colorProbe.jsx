@@ -63,7 +63,7 @@ function YColorProbe()
     }
     this.yMainFunction = function yMainFunction()
     {
-	app.beginUndoGroup(this.yTool.info.name); // yTool is a refernece to the Tool object, because THIS in this context returns the ButtonObject.... 
+	app.beginUndoGroup( yColorProbe.info.name ); // yTool is a refernece to the Tool object, because THIS in this context returns the ButtonObject.... 
 	
 	//It works with Sampled layers at a 100% scale only.
 	try
@@ -124,5 +124,5 @@ if (typeof(YTB)=='undefined')
 }
 else
 {
-    YTB.addTool(new YColorProbe());
+    yColorProbe = YTB.addTool(new YColorProbe());
 }
