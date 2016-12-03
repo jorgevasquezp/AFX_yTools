@@ -4,7 +4,7 @@ function YStopMotionLayer()
     this.info =
     {
 	name : "YStopMotionLayer",
-	version : 0.1,
+	version : 0.11,
 	stage : "development",
 	description : "Tool to create a sprite-like behaviour with a composition.",
 	url : "yorchnet.com"
