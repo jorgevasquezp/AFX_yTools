@@ -1,16 +1,12 @@
 ﻿#include "../yScripts/y_JSExtensions.jsx";
-function YGenericTool()
+function YStopMotionLayer()
 {
     this.info =
     {
-<<<<<<< HEAD
-	name : "yStopMotion",
-=======
-	name : "yGenericTool",
->>>>>>> 841484771586f75c140288b329d54c96d3cb3925
-	version : 0.1,
+	name : "YStopMotionLayer",
+	version : 0.11,
 	stage : "development",
-	description : "Dynamically change layer sequence opacity from a slider in pComp",
+	description : "Tool to create a sprite-like behaviour with a composition.",
 	url : "yorchnet.com"
     };
     this.appearence =
@@ -21,6 +17,8 @@ function YGenericTool()
     this.resources = 
     {
 	icon : new File('yNet.png'),
+	e_0000 : "There are no comps in project.",
+	e_0001 : "No Comps selected."
     };
     this.init = function init()
     {
@@ -68,14 +66,74 @@ function YGenericTool()
 	this.window.center();
 	this.window.show();
     }
+    
+    
+    /** MEAT **/
+    
+    
+    this.yApplyStopMotionLayer = function yApplyStopMotionLayer(){
+	
+	myName = "yStopMotionLayer";
+	myVer = "0.2a";
+	nComps = app.project.items.length;
+	    app.beginUndoGroup(myName);
+	if(nComps>0){
+	    sel = app.project.activeItem.selectedLayers;  //array containing selection;
+		if(sel.length == 1&&sel[0].source!= null){
+		    
+		    myItem = sel[0].source;
+		    myItemType = myItem.typeName;
+		    
+		    if(myItemType!="Composition"){
+			alert(e_0001,myName+' '+myVer); 
+		    }else{
+
+			sliderCtrl = sel[0]("Effects").addProperty("Slider Control");
+			sliderCtrl.name =  "Animation State"; //should check for previously created sliders named the same and name uniquely accordingly.
+			txtExpression = 'myLayer = thisLayer;myComp =comp(myLayer.name);\
+    max = myComp.numLayers;\
+    myValue = effect("'+sliderCtrl.name+'")("'+sliderCtrl("Slider").name+'");\
+    if(myValue<=max&&myValue>1){\
+    parseInt(myValue)\
+    }else if (myValue>max){\
+    max\
+    }else if(myValue<1){1}';
+			//'l = thisComp.layer('+'"'+app.project.activeItem.selectedLayers[0].name+'"'+');'+'fromWorld(l.toComp(l.transform.anchorPoint))';
+			sliderCtrl("Slider").expression =  txtExpression;
+			sliderCtrl("Slider").setValue(1);
+			txtExpression = null;
+			nLayers =myItem.numLayers;
+			txtExpression = 'extValue = comp("'+sel[0].containingComp.name+'").layer("'+myItem.name+'").effect("'+sliderCtrl.name+'")("'+sliderCtrl("Slider").name+'");if(extValue == thisLayer.index){100}else{0}';
+			for (z=1;z<=nLayers;z++){
+			    myItem.layer(z).opacity.expression=txtExpression;
+			    }
+			txtExpression = null;
+		    } 
+		}else{
+		    alert( this.resources.e_0001,myName+' '+myVer); 
+		}
+	}else{
+	    alert(this.resources.e_0000,myName+' '+myVer+" : Error");
+	}
+    app.endUndoGroup();
+    }
+
+    
+    /**/
+    
+    
     this.yMainFunction = function yMainFunction()
     {
-        this.createUI();
+        //this.createUI();
+	this.YStopMotionLayer();
     }
     this.activate = function activate()
     {
-	this.yTool.yMainFunction();
+        yStopMotionLayer.yApplyStopMotionLayer();
+        //this.yMainFunction();
     }
+    
+    
     
     this.init();
     return this;
@@ -84,10 +142,10 @@ function YGenericTool()
 //CHECKS that the toolbox exists, and if it doesn´t it runs the script on its own.
 if (typeof(YTB)=='undefined')
 {
-    yGenericTool = new YGenericTool();
-    yGenericTool.activate();
+    yStopMotionLayer = new YStopMotionLayer();
+    yStopMotionLayer.activate();
 }
 else
 {
-    YTB.addTool(new YGenericTool());
+    yStopMotionLayer = YTB.addTool(new YStopMotionLayer());
 }
