@@ -93,7 +93,7 @@ function YBindBetween2()
     }
     this.activate = function activate()
     {
-	this.yTool.yMainFunction();
+        yBindBetween2.yMainFunction();
     }
     this.run = function run()
     {
@@ -212,5 +212,5 @@ if (typeof(YTB)=='undefined')
 }
 else
 {
-    YTB.addTool(new YBindBetween2());
+    yBindBetween2 = YTB.addTool(new YBindBetween2());
 }
