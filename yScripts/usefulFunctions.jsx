@@ -1,20 +1,7 @@
 ﻿#include "y_JSExtensions.jsx";
-/*
-if (Array.prototype.getOne==null) Array.prototype.getOne=function(item){    //Extends the Array class with the getOne functions wich 
-    var val = -1;
-    for(i=0;i<=this.length;i++){
-        if(this[i]==item){
-            var val = i;
-            }
-        }
-   return val;
-}
-*/
-function sortNumber(a,b)
-{
+function sortNumber(a,b){
 return a - b;
 }
-
 function pad(n,i){ //pad n with ceroes up to i places.
     if (String(n).length>=i){
         return String(n)
@@ -27,8 +14,6 @@ function pad(n,i){ //pad n with ceroes up to i places.
         return padding+String(n)
 }
 }
-
-
 function yUniStr(str){
     if (app.project.activeItem != null) {
         myLayers = app.project.activeItem.layers;
@@ -67,7 +52,6 @@ function getBaseName(str){
            return str;
            };
     }
-
 function getFirstGap(array){
     length = array.length
     array.sort(function sortNumber(a,b){return a-b})
@@ -92,8 +76,6 @@ function yReplace(inputSTR,replaceSTR,replacementSTR){
         }
     return tmpSTR;
     }
-
-
 function genStamp(args){
     d = new Date();
     //alert(d.getMonth());
@@ -103,7 +85,6 @@ function genStamp(args){
     str = String(m)+String(d)+String(y); 
 return str
 }
-
 function mergeMultiLine(_str){
     var re = new RegExp('[\n\r]');
     _lines = _str.split(re);
@@ -127,4 +108,12 @@ function mergeMultiLine(_str){
         newStr = _str;
     }
     return newStr;
+}
+function yFactor(n,f){
+    if((typeof(n)=='number'&&typeof(f)=='number')&&(n>f)){
+        value = n - (n%f);
+        return(value);
+    }else{
+        alert('error');
+    }
 }

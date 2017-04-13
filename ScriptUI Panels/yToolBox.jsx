@@ -81,6 +81,7 @@ YTB =
         /**** TO DO ****/
         // Check that the tool object is unique.
         // Call for a window resize so it refreshes propperly.
+        //alert( aTool.info.name );
         
         this.tools.push( aTool );
 
@@ -92,6 +93,7 @@ YTB =
         //alert(btn.onClick);
 
         this.window.layout.layout(true);
+        this.window.layout.resize();
         
         return aTool;
         
@@ -117,8 +119,10 @@ YTB =
 YTB.init();
 
 #include "../yScripts/y_setStructure.jsx";
+#include "../yScripts/y_CompHerder.jsx";
 #include "../yScripts/y_colorProbe.jsx";
 #include "../yScripts/y_BindBetween2.jsx";
 #include "../yScripts/y_CPOffset.jsx";
 #include "../yScripts/y_puppetRig.jsx";
 #include "../yScripts/y_stopMotionLayer.jsx";
+

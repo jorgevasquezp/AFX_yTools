@@ -1,4 +1,6 @@
-﻿if (AVLayer.prototype. getPins==null) AVLayer.prototype. getPins=function(){    //Extends the AVLayer class with the getPinsfunctions which returns the Layer's property groups which are pins.
+﻿//Useful extensions to AFX Extendscript classes.
+
+if (AVLayer.prototype. getPins==null) AVLayer.prototype. getPins=function(){    //Extends the AVLayer class with the getPinsfunctions which returns the Layer's property groups which are pins.
     this.selectedPins = [];
   for(prop=0;prop<this.selectedProperties.length;prop++){
       p= this.selectedProperties[prop];
