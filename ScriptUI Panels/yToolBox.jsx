@@ -84,7 +84,7 @@ YTB =
         //alert( aTool.info.name );
         
         this.tools.push( aTool );
-
+        //alert( aTool.btnLauyout );
         var btn  = this.window.grp.main.add( aTool.btnLauyout );
         
         btn.onClick = aTool.activate;
