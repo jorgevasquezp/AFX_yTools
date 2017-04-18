@@ -5,6 +5,8 @@ function RenderToProject()
     this.info =
     {
 	name : "RenderToProject",
+	btn1 : "RenderToProject",
+	btn2 : "SetAllToProject",
 	version : 0.1,
 	stage : "development",
 	description : "Set Renders to project appropriate folders according to the studio folder structure.",
@@ -21,6 +23,17 @@ function RenderToProject()
     };
     this.methods =
     {	
+	getSelectedProjectItems: function(){
+	    var items = [];
+	    var p = app.project;
+	    for ( var i = 1 ; i <= p.numItems ; i ++ ){
+		var item = p.item(i);
+		if ( item.selected ){
+		    items.push(item);
+		}
+	    }
+	    return items;
+	},
 	pad : function ( n , pad ) {
 		zeros = "";
 		for ( i = 0 ; i < pad ; i ++ )
@@ -71,19 +84,11 @@ function RenderToProject()
 	    
 	    return base_path;
 	},
-	setRendersToProjectPath : function(){
-	    var q = app.project.renderQueue;
-	    //check the render queue item is not already rendered.
-	    
-	    for ( var i = 1 ; i <= q.numItems ; i ++ ){
-		item = q.item(i);
-		//3015 is QUEUED 
-		//3013 is NEEDS_OUTPUT
-		
-		if ( (item.status == 3015) || (item.status == 3013) ){
-		    for ( var j = 1 ; j <= item.numOutputModules ; j ++ ){
-			o_module = item.outputModule(j);
-			var old_name = item.comp.name.replace(".","_");
+	setRenderToProjectPath : function( rqItem ){
+	    if ( (rqItem.status == 3015) || (rqItem.status == 3013) ){
+		    for ( var j = 1 ; j <= rqItem.numOutputModules ; j ++ ){
+			o_module = rqItem.outputModule(j);
+			var old_name = rqItem.comp.name.replace(".","_");
 			//alert(old_name);
 			if ( o_module.file != null ){
 			    
@@ -110,23 +115,63 @@ function RenderToProject()
 		    for ( var i = 0 ; i < p.length ; i ++ ){
 			s += "\n"+p[i];
 		    }
-		    alert( "Rendering to :" + "\n" + s + "\n\n" + o_module.file.name );
+		    //alert( "Rendering to :" + "\n" + s + "\n\n" + o_module.file.name );
 		    }
+		}
+	},
+	setRendersToProjectPath : function(){
+	    var q = app.project.renderQueue;
+	    //check the render queue item is not already rendered.
+	    
+	    for ( var i = 1 ; i <= q.numItems ; i ++ ){
+		item = q.item(i);
+		//3015 is QUEUED 
+		//3013 is NEEDS_OUTPUT
+		
+		if ( (item.status == 3015) || (item.status == 3013) ){
+		    this.setRenderToProjectPath( item );
 		}
 	    }
 	},
+	renderSelectedToProjectPath: function(){
+	    var q = app.project.renderQueue;
+	    var items = this.getSelectedProjectItems();
+	    for ( var i = 0 ; i < items.length; i ++){
+		rqItem = q.items.add(items[i]);
+		this.setRenderToProjectPath(rqItem);
+	    }
+	    q.showWindow(true);
+	}
     }
 
     this.init = function init()
-    {
-        
+    {	
+        /*
+	 * Sketching a possible multi button approach.
 	this.btnLauyout = 
-	"button\
+	"group\
 	 {\
+	    btn1:Button{\
+		preferredSize: ['" + this.appearence.buttonWidth + "','" + this.appearence.buttonHeight + "'],\
+		text:'" + this.info.btn1 + "',\
+		onClick: "+ this.methods.setRendersToProjectPath;+" ,\
+		helpTip:'" + this.info.description + "'\
+	    },\
+	    btn2:Button{\
+		preferredSize: ['" + this.appearence.buttonWidth + "','" + this.appearence.buttonHeight + "'],\
+		text:'" + this.info.btn2 + "',\
+		helpTip:'" + this.info.description + "'\
+	    }\
+	}";
+	*/
+	
+	this.btnLauyout = 
+	"button{\
 	    preferredSize: ['" + this.appearence.buttonWidth + "','" + this.appearence.buttonHeight + "'],\
-	    text:'" + this.info.name + "',\
+	    text:'" + this.info.btn1 + "',\
 	    helpTip:'" + this.info.description + "'\
-	 }";
+	}";
+	
 	
 	this. res = 
 	 "window\
@@ -199,8 +244,9 @@ function RenderToProject()
     }
     
     this.yMainFunction = function yMainFunction()
-    {
-        w = this.methods.setRendersToProjectPath();
+    {	
+	//Have to Separate this into "Operators" so I can have mutiple buttons in a single Tool.
+        w = this.methods.renderSelectedToProjectPath();
     }
     this.activate = function activate()
     {
