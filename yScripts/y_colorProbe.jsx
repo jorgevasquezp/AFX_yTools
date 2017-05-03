@@ -87,9 +87,9 @@ function YColorProbe()
             radiusCTRL.name ='radius';
             myNull("Effects")("radius")('Slider').setValue(5);
             colExp = 'myLayer = thisLayer("Effects")("sampledLayer")("Layer");\
-            p = thisLayer.toWorld(thisLayer.transform.anchorPoint);\
-            r = thisLayer("Effects")("radius")("Slider");\
-            myLayer.sampleImage(p, radius = [r, r], postEffect=true, t=time)';
+p = myLayer.fromWorld(thisLayer.toComp(thisLayer.transform.anchorPoint))\
+r = thisLayer("Effects")("radius")("Slider");\
+myLayer.sampleImage(p, radius = [r, r], postEffect=true, t=time)';
             myNull("Effects")('outColor')('Color').expression=colExp;
             myNull.label=2;
             myNull.source.height=30;
