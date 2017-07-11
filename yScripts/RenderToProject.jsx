@@ -74,15 +74,18 @@ function RenderToProject()
 		var base_path = file_path.substr(0,search_gfx+gfx_string.length)+"/"+gfx_output_base;
 		if ( search_endtag != -1 ){
 		    base_path += "/" + endtag_output_extra;
+		}else{
+		    base_path += "/" + scene_output_extra;
 		}
-		base_path += "/" + scene_output_extra + "/" + this.getTodayTag();
 	    }
 	    
 	    if( search_vfx != -1 ){
-		var base_path = file_path.substr(0,search_vfx+vfx_string.length)+"/"+vfx_output_base + "/" + this.getTodayTag();;
+		var base_path = file_path.substr(0,search_vfx+vfx_string.length)+"/"+vfx_output_base ;;
 	    }
 	    
-	    return base_path;
+	    alert(base_path);
+	    
+	    return base_path + "/" + this.getTodayTag();
 	},
 	setRenderToProjectPath : function( rqItem ){
 	    if ( (rqItem.status == 3015) || (rqItem.status == 3013) ){
