@@ -83,7 +83,7 @@ function RenderToProject()
 		var base_path = file_path.substr(0,search_vfx+vfx_string.length)+"/"+vfx_output_base ;;
 	    }
 	    
-	    alert(base_path);
+	    //alert(base_path);
 	    
 	    return base_path + "/" + this.getTodayTag();
 	},
@@ -91,12 +91,47 @@ function RenderToProject()
 	    if ( (rqItem.status == 3015) || (rqItem.status == 3013) ){
 		    for ( var j = 1 ; j <= rqItem.numOutputModules ; j ++ ){
 			o_module = rqItem.outputModule(j);
+			
 			var old_name = rqItem.comp.name.replace(".","_");
 			//alert(old_name);
 			if ( o_module.file != null ){
-			    
-			    
 			    var new_path = this.getOutputBasePath();
+			    var new_folder = Folder( new_path );
+			    if ( !new_folder.exists ){
+				new_folder.create();
+			    }
+			    //alert(new_path + "/" + old_name)
+			    var new_file = new File( new_path + "/" + old_name );
+			    o_module.file = new_file ;
+			    //alert ( new_path );
+			    //o_module.file= new_file;
+			    
+			}
+			
+		    var p = String( o_module.file.path ).split("/");
+		    
+		    p.splice(0,3);
+		    
+		    var s = "";
+		    
+		    for ( var i = 0 ; i < p.length ; i ++ ){
+			s += "\n"+p[i];
+		    }
+		    //alert( "Rendering to :" + "\n" + s + "\n\n" + o_module.file.name );
+		    }
+		}
+	},
+	setRenderToProjectPath : function( rqItem , extra_path ){
+	    alert(extra_path);
+	    if ( (rqItem.status == 3015) || (rqItem.status == 3013) ){
+		    for ( var j = 1 ; j <= rqItem.numOutputModules ; j ++ ){
+			o_module = rqItem.outputModule(j);
+			
+			var old_name = rqItem.comp.name.replace(".","_");
+			//alert(old_name);
+			if ( o_module.file != null ){
+			    var new_path = this.getOutputBasePath()+ "/" +extra_path;
+			    
 			    var new_folder = Folder( new_path );
 			    if ( !new_folder.exists ){
 				new_folder.create();
@@ -140,8 +175,21 @@ function RenderToProject()
 	    var q = app.project.renderQueue;
 	    var items = this.getSelectedProjectItems();
 	    for ( var i = 0 ; i < items.length; i ++){
-		rqItem = q.items.add(items[i]);
-		this.setRenderToProjectPath(rqItem);
+		if( items[i].typeName == "Composition" ){
+		    var item = items[i];
+		    rqItem = q.items.add(item);
+		    this.setRenderToProjectPath(rqItem);
+		}
+		else if ( items[i].typeName == "Folder" )
+		{
+		    var folder = items[i];
+		    for ( var j = 1 ; j <= folder.numItems ; j ++ )
+		    {
+			var item = folder.items[j];
+			rqItem = q.items.add(item);
+			this.setRenderToProjectPath(rqItem, item.parentFolder.name );
+		    }
+		}
 	    }
 	    q.showWindow(true);
 	}
