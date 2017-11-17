@@ -87,6 +87,7 @@ function RenderToProject()
 	    
 	    return base_path + "/" + this.getTodayTag();
 	},
+	/*
 	setRenderToProjectPath : function( rqItem ){
 	    if ( (rqItem.status == 3015) || (rqItem.status == 3013) ){
 		    for ( var j = 1 ; j <= rqItem.numOutputModules ; j ++ ){
@@ -121,8 +122,9 @@ function RenderToProject()
 		    }
 		}
 	},
+	*/
 	setRenderToProjectPath : function( rqItem , extra_path ){
-	    alert(extra_path);
+	    //alert(extra_path);
 	    if ( (rqItem.status == 3015) || (rqItem.status == 3013) ){
 		    for ( var j = 1 ; j <= rqItem.numOutputModules ; j ++ ){
 			o_module = rqItem.outputModule(j);
@@ -130,7 +132,14 @@ function RenderToProject()
 			var old_name = rqItem.comp.name.replace(".","_");
 			//alert(old_name);
 			if ( o_module.file != null ){
-			    var new_path = this.getOutputBasePath()+ "/" +extra_path;
+			    if ( extra_path != undefined )
+			    {
+				var new_path = this.getOutputBasePath()+ "/" +extra_path;
+			    }
+			    else
+			    {
+				var new_path = this.getOutputBasePath();
+			    }
 			    
 			    var new_folder = Folder( new_path );
 			    if ( !new_folder.exists ){
