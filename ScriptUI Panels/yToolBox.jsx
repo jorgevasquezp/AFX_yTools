@@ -122,6 +122,7 @@ YTB.init();
 #include "../yScripts/y_CompHerder.jsx";
 #include "../yScripts/y_flattenSelectedFolderContents.jsx";
 #include "../yScripts/RenderToProject.jsx";
+#include "../yScripts/y_RenderMarkers.jsx";
 #include "../yScripts/y_colorProbe.jsx";
 #include "../yScripts/y_BindBetween2.jsx";
 #include "../yScripts/y_CPOffset.jsx";
