@@ -129,7 +129,8 @@ function YPuppetRigTool()
 	if(puppetEffects.length>0){
 	     posPins = [];
 	for(i=0;i<puppetEffects.length;i++){
-	    posPinGroup = puppetEffects[i]('ADBE FreePin3 ARAP Group')('ADBE FreePin3 Mesh Group')('ADBE FreePin3 Mesh Atom')('ADBE FreePin3 PosPins');
+        /*TODO : Make it work with layers with multiple effects*/
+         posPinGroup = puppetEffects[i]('ADBE FreePin3 ARAP Group')('ADBE FreePin3 Mesh Group')('ADBE FreePin3 Mesh Atom')('ADBE FreePin3 PosPins');
 	    for(j=1;j<=posPinGroup.numProperties;j++){
 		posPins.push(puppetEffects[i]('ADBE FreePin3 ARAP Group')('ADBE FreePin3 Mesh Group')('ADBE FreePin3 Mesh Atom')('ADBE FreePin3 PosPins')(j));
 		}
