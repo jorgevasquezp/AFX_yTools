@@ -25,13 +25,17 @@ function RenderToProject()
     {	
 	getSelectedProjectItems: function(){
 	    var items = [];
+	    //var debugItems = [];
 	    var p = app.project;
 	    for ( var i = 1 ; i <= p.numItems ; i ++ ){
 		var item = p.item(i);
+		
 		if ( item.selected ){
 		    items.push(item);
+		    //debugItems.push(item.name);
 		}
 	    }
+	    //alert(debugItems);
 	    return items;
 	},
 	pad : function ( n , pad ) {
@@ -169,7 +173,6 @@ function RenderToProject()
 	setRendersToProjectPath : function(){
 	    var q = app.project.renderQueue;
 	    //check the render queue item is not already rendered.
-	    
 	    for ( var i = 1 ; i <= q.numItems ; i ++ ){
 		item = q.item(i);
 		//3015 is QUEUED 
@@ -183,6 +186,25 @@ function RenderToProject()
 	renderSelectedToProjectPath: function(){
 	    var q = app.project.renderQueue;
 	    var items = this.getSelectedProjectItems();
+	    
+	    for ( var i = 0 ; i < items.length; i ++){
+			if( items[i].typeName == "Composition" ){
+				var item = items[i];
+				rqItem = q.items.add(item);
+				this.setRenderToProjectPath(rqItem);
+			}
+			//alert(items);
+			if( items[i].typeName == "Folder" ){
+				var folder = items[i];
+				for ( var j = 1 ; j <= folder.numItems ; j ++ )
+				{
+					var item = folder.items[j];
+					rqItem = q.items.add(item);
+					this.setRenderToProjectPath(rqItem, item.parentFolder.name );
+				}
+			}
+		}
+		/*
 	    for ( var i = 0 ; i < items.length; i ++){
 		if( items[i].typeName == "Composition" ){
 		    var item = items[i];
@@ -199,7 +221,13 @@ function RenderToProject()
 			this.setRenderToProjectPath(rqItem, item.parentFolder.name );
 		    }
 		}
-	    }
+		else
+		{
+			
+		}
+		
+	    }*/
+	    
 	    q.showWindow(true);
 	}
     }
