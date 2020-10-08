@@ -54,42 +54,35 @@ function RenderToProject()
 	    var date_component = pad(today.getDate(),2);
 	    var full_year_component = String(today.getFullYear())
 	    var year_component = full_year_component.substr(full_year_component.length - 2,full_year_component.length );
-	    var tag = month_component + date_component + year_component
+	    //So long stupid confusing date system, hehe
+	    //var tag = month_component + date_component + year_component;
+	    var tag = year_component + month_component + date_component ;
 	    return tag;
 	},
 	getOutputBasePath : function(){
 	    var file = app.project.file;
-	    var file_path = String(app.project.file);
-	    var gfx_output_base = "05_Graphics_Output";
-	    var endtag_output_extra = "02_EndTags";
-	    var scene_output_extra = "01_GFX_Scenes";
-	    var vfx_output_base = "03_Composite_Outputs";
-	    var vfx_output_base;
-	    var gfx_string = "09_Graphics";
-	    var vfx_string = "08_Composite";
-	    var endtag_string = "EndTags";
+	    var file_path = String(file);
 	    
-	    var search_gfx = file_path.search(gfx_string);
-	    var search_vfx = file_path.search(vfx_string);
-	    var search_endtag = file_path.search(endtag_string);
+	    //yorchnet folderstructure
+	    pro_folder = "pro"
+        folder2d = "2d"
+        folder3d = "3d"
+	    
+	    var search_3d = file_path.search(folder3d);
+	    var search_2d = file_path.search(folder2d);
 	    var base_path;
 	    
-	    if ( search_gfx != -1 ){
-		var base_path = file_path.substr(0,search_gfx+gfx_string.length)+"/"+gfx_output_base;
-		if ( search_endtag != -1 ){
-		    base_path += "/" + endtag_output_extra;
-		}else{
-		    base_path += "/" + scene_output_extra;
-		}
+	    if( search_2d != -1 ){
+		var base_path = file_path.substr(0,file_path.search(pro_folder)+pro_folder.length) +"/"+ folder2d ;;
 	    }
-	    
-	    if( search_vfx != -1 ){
-		var base_path = file_path.substr(0,search_vfx+vfx_string.length)+"/"+vfx_output_base ;;
+         if( search_3d != -1 ){
+		var base_path = file_path.substr(0,file_path.search(pro_folder)+pro_folder.length) +"/"+ folder3d ;;
 	    }
 	    
 	    //alert(base_path);
 	    
-	    return base_path + "/" + this.getTodayTag();
+	    return base_path + "/" + "renders" + "/" + this.getTodayTag();
+	    
 	},
 	/*
 	setRenderToProjectPath : function( rqItem ){
