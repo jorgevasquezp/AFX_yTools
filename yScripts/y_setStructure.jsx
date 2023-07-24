@@ -59,7 +59,7 @@ function YSetProjectTool()
     {
 	//alert("is this working");
 	app.beginUndoGroup('ySetProject');
-	var preStruct = ["01 MAIN","02 PComp","03 Source Layers" ,"04 Movies","05 Other Projects","06 Audio" , "07 Reference"];
+	var preStruct = ["01_MAIN","02_pComps","03_Images" ,"04_Movies","05_Audio" ,"06_Projects", "07_Ref", "08_Tools"];
 	var newStruct = [];
 	var projectItems = [];
 
